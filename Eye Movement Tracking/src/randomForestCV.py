@@ -82,9 +82,9 @@ def extractFeatures(data):
 
 #
 def main():
-    logging.info("[Normalized + Feature Selection] Classes: 10 Features: Mean, Std")
+    logging.info("[Normalized + Feature Selection] Features: Mean, Std")
     print "Reading data..."
-    X, Y = utils.read_data("../files/train_10.csv")
+    X, Y = utils.read_data("../files/train.csv")
     print "Preprocessing..."
     X = preprocess(X)
     print "Extracting Features..."
