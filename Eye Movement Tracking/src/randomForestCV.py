@@ -56,11 +56,11 @@ def addFeatures(part, width):
         currPt = multiple * width
         features.append(np.mean(part[prevPt: currPt]))
         features.append(np.std(part[prevPt: currPt]))
-        v = (part[currPt - 1] - part[prevPt]) / width
-        features.append(v)
-        a = (v - u) / width
-        features.append(a)
-        u = v
+        #v = (part[currPt - 1] - part[prevPt]) / width
+        #features.append(v)
+        #a = (v - u) / width
+        #features.append(a)
+        #u = v
     return features
 
 def splitSampleIntoParts(sample):
@@ -80,15 +80,15 @@ def extractFeatures(data):
             Pdata[i].extend(addFeatures(part, width))
     return Pdata
 
-#[Normalized + Feature Selection] Features: Mean, Std, Velocity, Accelaration
+#
 def main():
-    logging.info("Classes: 10 Raw")
+    logging.info("[Normalized + Feature Selection] Classes: 10 Features: Mean, Std")
     print "Reading data..."
     X, Y = utils.read_data("../files/train_10.csv")
     print "Preprocessing..."
-    #X = preprocess(X)
+    X = preprocess(X)
     print "Extracting Features..."
-    #X = extractFeatures(X)
+    X = extractFeatures(X)
     Y = [int(x) for x in Y]
     X, Y = np.array(X), np.array(Y)
     classMap = sorted(list(set(Y)))
@@ -96,7 +96,7 @@ def main():
     rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1)
     logging.info(rf)
     print "Selecting Features..."
-    #X = selectFeatures(X, Y, rf)
+    X = selectFeatures(X, Y, rf)
     folds = 5
     stf = cross_validation.StratifiedKFold(Y, folds)
     logging.info("CV Folds: " + str(folds))
