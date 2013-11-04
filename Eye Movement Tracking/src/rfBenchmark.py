@@ -15,6 +15,7 @@ def main():
     predicted_probs = rf.predict_proba(test)
     predicted_probs = [[min(max(x,0.001),0.999) for x in y]
                        for y in predicted_probs]
+    print utils.logloss(predicted_probs, test)
     predicted_probs = [["%f" % x for x in y] for y in predicted_probs]
     utils.write_delimited_file("../files/rf_benchmark.csv",
                                 predicted_probs)

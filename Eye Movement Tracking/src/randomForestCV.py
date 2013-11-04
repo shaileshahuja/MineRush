@@ -80,15 +80,15 @@ def extractFeatures(data):
             Pdata[i].extend(addFeatures(part, width))
     return Pdata
 
+#[Normalized + Feature Selection] Features: Mean, Std, Velocity, Accelaration
 def main():
-    logging.info("[Normalized + Feature Selection] Features: Mean, Std, Velocity, Accelaration")
+    logging.info("Classes: 10 Raw")
     print "Reading data..."
-    X, Y = utils.read_data("../files/train.csv")
+    X, Y = utils.read_data("../files/train_10.csv")
     print "Preprocessing..."
-    X = preprocess(X)
+    #X = preprocess(X)
     print "Extracting Features..."
-    X = extractFeatures(X)
-    #X = [x[400:405] for x in X]
+    #X = extractFeatures(X)
     Y = [int(x) for x in Y]
     X, Y = np.array(X), np.array(Y)
     classMap = sorted(list(set(Y)))
@@ -96,7 +96,7 @@ def main():
     rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1)
     logging.info(rf)
     print "Selecting Features..."
-    X = selectFeatures(X, Y, rf)
+    #X = selectFeatures(X, Y, rf)
     folds = 5
     stf = cross_validation.StratifiedKFold(Y, folds)
     logging.info("CV Folds: " + str(folds))

@@ -480,3 +480,100 @@ Mean Loss: 1.10972508009
 End at: 2013-11-04 20:08:22.669000
 
 
+Start at: 2013-11-04 21:12:38.309000
+[Normalized + Feature Selection] Left Eye Only Classes: 10 Features: Mean, Std, Velocity, Accelaration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=False,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.90625
+Loss(Fold 0): 0.643232685555
+Accuracy(Fold 1): 0.895833333333
+Loss(Fold 1): 0.647419333618
+Accuracy(Fold 2): 0.864583333333
+Loss(Fold 2): 0.698560628422
+Accuracy(Fold 3): 0.833333333333
+Loss(Fold 3): 0.70975832828
+Accuracy(Fold 4): 0.831578947368
+Loss(Fold 4): 0.704360480389
+Mean Accuracy: 0.866315789474
+Mean Loss: 0.680666291253
+End at: 2013-11-04 21:13:23.665000
+
+
+Start at: 2013-11-04 21:14:23.243000
+[Normalized + Feature Selection] Right Eye Only Classes: 10 Features: Mean, Std, Velocity, Accelaration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=False,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.864583333333
+Loss(Fold 0): 0.781821971753
+Accuracy(Fold 1): 0.875
+Loss(Fold 1): 0.761103083468
+Accuracy(Fold 2): 0.916666666667
+Loss(Fold 2): 0.660970195852
+Accuracy(Fold 3): 0.875
+Loss(Fold 3): 0.746438522439
+Accuracy(Fold 4): 0.831578947368
+Loss(Fold 4): 0.820411385249
+Mean Accuracy: 0.872565789474
+Mean Loss: 0.754149031752
+End at: 2013-11-04 21:15:09.299000
+
+
+Start at: 2013-11-04 21:40:38.776000
+Classes: 10 Raw
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=False,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.78125
+Loss(Fold 0): 0.975714414429
+Accuracy(Fold 1): 0.770833333333
+Loss(Fold 1): 1.03008519213
+Accuracy(Fold 2): 0.78125
+Loss(Fold 2): 0.98060423077
+Accuracy(Fold 3): 0.802083333333
+Loss(Fold 3): 0.944221200619
+Accuracy(Fold 4): 0.747368421053
+Loss(Fold 4): 1.01997078654
+Mean Accuracy: 0.776557017544
+Mean Loss: 0.990119164898
+End at: 2013-11-04 21:42:33.988000
+
+C:\Python27\python.exe "C:/Users/Shailesh/Documents/GitHub/MineRush/Eye Movement Tracking/src/uniformBenchmark.py"
+Testing...
+Accuracy(Fold 0): 0.15625
+Loss(Fold 0): 6.90775527898
+Accuracy(Fold 1): 0.15625
+Loss(Fold 1): 6.90775527898
+Accuracy(Fold 2): 0.15625
+Loss(Fold 2): 6.90775527898
+Accuracy(Fold 3): 0.15625
+Loss(Fold 3): 6.90775527898
+Accuracy(Fold 4): 0.147368421053
+Loss(Fold 4): 6.90775527898
+Mean Accuracy: 0.154473684211
+Mean Loss: 6.90775527898
+
+C:\Python27\python.exe "C:/Users/Shailesh/Documents/GitHub/MineRush/Eye Movement Tracking/src/svmBenchmark.py"
+Testing...
+Accuracy(Fold 0): 0.229166666667
+Loss(Fold 0): 2.17674446689
+Accuracy(Fold 1): 0.25
+Loss(Fold 1): 2.15568738424
+Accuracy(Fold 2): 0.25
+Loss(Fold 2): 2.14311651014
+Accuracy(Fold 3): 0.229166666667
+Loss(Fold 3): 2.17633139002
+Accuracy(Fold 4): 0.242105263158
+Loss(Fold 4): 2.16010114954
+Mean Accuracy: 0.240087719298
+Mean Loss: 2.16239618016
