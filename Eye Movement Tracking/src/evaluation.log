@@ -205,5 +205,72 @@ Mean Loss: 1.42588698406
 End at: 2013-11-04 17:08:32.175000
 
 
-Start at: 2013-11-04 17:43:36.978000
-[FIXED]Features: Std, Velocity, Acceleration
+Start at: 2013-11-04 18:08:39.403000
+[Normalized] Features: Mean, Std, Velocity, Acceleration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.801526717557
+Loss(Fold 0): 1.25943807545
+Accuracy(Fold 1): 0.801526717557
+Loss(Fold 1): 1.18491478325
+Accuracy(Fold 2): 0.769230769231
+Loss(Fold 2): 1.23100578536
+Accuracy(Fold 3): 0.807692307692
+Loss(Fold 3): 1.23311293271
+Accuracy(Fold 4): 0.807692307692
+Loss(Fold 4): 1.25606347182
+Mean Accuracy: 0.797533763946
+Mean Loss: 1.23290700972
+End at: 2013-11-04 18:10:54.922000
+
+
+Start at: 2013-11-04 18:11:58.233000
+[Normalized] Features: Mean, Std, Velocity
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.801526717557
+Loss(Fold 0): 1.2460150797
+Accuracy(Fold 1): 0.793893129771
+Loss(Fold 1): 1.17442084825
+Accuracy(Fold 2): 0.776923076923
+Loss(Fold 2): 1.2091885717
+Accuracy(Fold 3): 0.807692307692
+Loss(Fold 3): 1.21101123932
+Accuracy(Fold 4): 0.823076923077
+Loss(Fold 4): 1.23451158521
+Mean Accuracy: 0.800622431004
+Mean Loss: 1.21502946484
+End at: 2013-11-04 18:14:00.564000
+
+
+Start at: 2013-11-04 18:14:42.140000
+[Normalized] Features: Std, Velocity, Acceleration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.778625954198
+Loss(Fold 0): 1.30010776651
+Accuracy(Fold 1): 0.763358778626
+Loss(Fold 1): 1.25001733447
+Accuracy(Fold 2): 0.761538461538
+Loss(Fold 2): 1.2877030478
+Accuracy(Fold 3): 0.776923076923
+Loss(Fold 3): 1.29861097332
+Accuracy(Fold 4): 0.784615384615
+Loss(Fold 4): 1.34298111339
+Mean Accuracy: 0.77301233118
+Mean Loss: 1.2958840471
+End at: 2013-11-04 18:16:36.492000
+
+

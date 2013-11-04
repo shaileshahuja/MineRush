@@ -11,12 +11,13 @@ import logging
 import datetime
 
 def preprocess(data):
+    processedData = [[] for _ in xrange(len(data))]
     # taken from http://www.kasprowski.pl/emvic/stimFile.txt
     # format (from, to, Xfocus, Yfocus)
-    focusPts = [(1, 398, 0, 0), (398, 536, 2048, -2048), (536, 673, 2048, 0), (673, 810, 0, 2048),
+    focusPts = [(0, 398, 0, 0), (398, 536, 2048, -2048), (536, 673, 2048, 0), (673, 810, 0, 2048),
                  (810, 947, 0, 0), (947, 1085, -2048, 0), (1085, 1222, 0, -2048),  (1222, 1364, 2048, 2048),
                  (1364, 1496, 0, 0), (1496, 1634, 2048, 0), (1634, 1771, -2048, -2048), (1771, 2048, 0, 0)]
-    for sample in data:
+    for i, sample in enumerate(data):
         lx, rx, ly, ry = splitSampleIntoParts(sample)
         for focus in focusPts:
             # change mean to focus point and
@@ -29,6 +30,8 @@ def preprocess(data):
             ly[focus[0]:focus[1]] = [(point - lymean + focus[3])/2048 for point in ly[focus[0]:focus[1]]]
             rymean = np.mean(ry[focus[0]:focus[1]])
             ry[focus[0]:focus[1]] = [(point - rymean + focus[3])/2048 for point in ry[focus[0]:focus[1]]]
+        processedData[i] = lx + rx + ly + ry
+    return processedData
 
 
 def addFeatures(part, width):
@@ -42,7 +45,7 @@ def addFeatures(part, width):
         v = (part[currPt - 1] - part[prevPt]) / width
         features.append(v)
         a = (v - u) / width
-        #features.append(a)
+        features.append(a)
         u = v
     return features
 
@@ -64,9 +67,12 @@ def extractFeatures(data):
     return Pdata
 
 def main():
-    logging.info("[FIXED]Features: Std, Velocity, Acceleration")
+    logging.info("[Normalized] Features: Mean, Std, Velocity, Acceleration")
+    print "Reading data..."
     X, Y = utils.read_data("../files/train.csv")
-    preprocess(X)
+    print "Preprocessing..."
+    X = preprocess(X)
+    print "Extracting Features..."
     X = extractFeatures(X)
     #X = [x[400:405] for x in X]
     Y = [int(x) for x in Y]
@@ -79,6 +85,7 @@ def main():
     stf = cross_validation.StratifiedKFold(Y, folds)
     logging.info("CV Folds: " + str(folds))
     loss = []
+    print "Testing..."
     for i, (train, test) in enumerate(stf):
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
         rf.fit(X_train, y_train)
