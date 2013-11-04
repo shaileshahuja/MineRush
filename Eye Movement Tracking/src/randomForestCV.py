@@ -31,10 +31,6 @@ def preprocess(data):
             rymean = np.mean(ry[focus[0]:focus[1]])
             ry[focus[0]:focus[1]] = [(point - rymean + focus[3])/2048 for point in ry[focus[0]:focus[1]]]
         processedData[i] = lx + rx + ly + ry
-        print lx
-        print ly
-        print rx
-        print ry
     return processedData
 
 
