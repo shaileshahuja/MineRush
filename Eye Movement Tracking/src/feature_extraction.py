@@ -1,5 +1,7 @@
 __author__ = 'Shailesh'
 
+__author__ = 'Shailesh'
+
 from sklearn.ensemble import RandomForestClassifier
 import utils
 from sklearn import cross_validation
@@ -80,8 +82,7 @@ def main():
     classMap = sorted(list(set(Y)))
     accs = []
     rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1, compute_importances=True)
-    logging.info(rf)
-    folds = 5
+
     stf = cross_validation.StratifiedKFold(Y, folds)
     logging.info("CV Folds: " + str(folds))
     loss = []
@@ -100,17 +101,10 @@ def main():
     logging.info("Mean Accuracy: " + str(np.mean(accs)))
     logging.info("Mean Loss: " + str(np.mean(loss)))
 
-def setupLogging():
-    logging.basicConfig(filename='evaluation.log', format='%(message)s', level=logging.DEBUG)
-    console = logging.StreamHandler()  # Add the log message handler to the logger
-    console.setLevel(logging.INFO)  # set a format which is simpler for console use
-    formatter = logging.Formatter('%(message)s')  # tell the handler to use this format
-    console.setFormatter(formatter)  # add the handler to the root logger
-    logging.getLogger('').addHandler(console)
-
 if __name__ == "__main__":
-    setupLogging()
-    logging.info("Start at: " + str(datetime.datetime.now()))
     main()
-    logging.info("End at: " + str(datetime.datetime.now()))
-    logging.info("\n")
+
+        for x,i in enumerate(rf.feature_importances_):
+        if i>np.average(rf.feature_importances_):
+            important_features.append(str(x))
+        print 'Most important features:',', '.join(important_features)
