@@ -5,6 +5,6 @@ with open("../files/sampleNormalized.txt") as handle, open("../files/sampleNorma
         line = line.strip()[1:-1]
         data = line.split(",")
         for elem in data:
-            output.write(elem + "\n")
+            output.write(elem.strip() + "\n")
         output.write("\n\n\n")
 
