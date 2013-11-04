@@ -6,7 +6,7 @@ import numpy as np
 
 def main():
     training, target = utils.read_data("../Data/train.csv")
-    test, throwaway = utils.read_data("../Data/test.csv")
+    test, _ = utils.read_data("../Data/test.csv")
 
     n_test = len(test)
     n_target = len(set(target))

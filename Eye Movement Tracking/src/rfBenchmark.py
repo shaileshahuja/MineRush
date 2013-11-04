@@ -19,5 +19,5 @@ def main():
     utils.write_delimited_file("../files/rf_benchmark.csv",
                                 predicted_probs)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

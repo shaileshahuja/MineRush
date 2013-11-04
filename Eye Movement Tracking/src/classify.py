@@ -12,3 +12,7 @@ if __name__ == "__main__":
     classify("../files/rf_benchmark.csv")
     print
     classify("C:/Users/Shailesh/Desktop/Courses/CSC489/Project/rf_benchmark.csv")
+    print
+    classify("../files/svm_benchmark.csv")
+    print
+    classify("C:/Users/Shailesh/Desktop/Courses/CSC489/Project/svm_benchmark.csv")
