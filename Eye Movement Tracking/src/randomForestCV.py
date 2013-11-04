@@ -10,6 +10,20 @@ import math
 import logging
 import datetime
 
+
+def selectFeatures(train, target, classifier):
+    classifier.fit(train, target)
+    importantFeatures = []
+    avg = np.average(classifier.feature_importances_)
+    for x,i in enumerate(classifier.feature_importances_):
+        if i > avg:
+            importantFeatures.append(x)
+    selectedData = [[] for _ in xrange(len(train))]
+    for i, sample in enumerate(train):
+        selectedData[i] = train[i][importantFeatures]
+    return np.array(selectedData)
+
+
 def preprocess(data):
     processedData = [[] for _ in xrange(len(data))]
     # taken from http://www.kasprowski.pl/emvic/stimFile.txt
@@ -67,20 +81,22 @@ def extractFeatures(data):
     return Pdata
 
 def main():
-    logging.info("[Normalized] Classes - 10 Raw")
+    logging.info("[Normalized + Feature Selection] Features: Mean, Std, Velocity, Accelaration")
     print "Reading data..."
-    X, Y = utils.read_data("../files/train_10.csv")
+    X, Y = utils.read_data("../files/train.csv")
     print "Preprocessing..."
     X = preprocess(X)
     print "Extracting Features..."
-    #X = extractFeatures(X)
+    X = extractFeatures(X)
     #X = [x[400:405] for x in X]
     Y = [int(x) for x in Y]
     X, Y = np.array(X), np.array(Y)
     classMap = sorted(list(set(Y)))
     accs = []
-    rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1, compute_importances=True)
+    rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1)
     logging.info(rf)
+    print "Selecting Features..."
+    X = selectFeatures(X, Y, rf)
     folds = 5
     stf = cross_validation.StratifiedKFold(Y, folds)
     logging.info("CV Folds: " + str(folds))

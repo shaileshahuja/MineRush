@@ -69,42 +69,27 @@ def extractFeatures(data):
     return Pdata
 
 def main():
-    logging.info("[Normalized] Classes - 10 Raw")
     print "Reading data..."
     X, Y = utils.read_data("../files/train_10.csv")
     print "Preprocessing..."
     X = preprocess(X)
     print "Extracting Features..."
-    #X = extractFeatures(X)
-    #X = [x[400:405] for x in X]
+    X = extractFeatures(X)
     Y = [int(x) for x in Y]
     X, Y = np.array(X), np.array(Y)
     classMap = sorted(list(set(Y)))
     accs = []
-    rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1, compute_importances=True)
+    rf = RandomForestClassifier(n_estimators=1000, n_jobs=-1, compute_importances=True, oob_score=True)
+    rf.fit(X, Y)
+    importantFeatures = []
+    for x,i in enumerate(rf.feature_importances_):
+        print len(rf.feature_importances_)
+        print x, i
+        if i>np.average(rf.feature_importances_):
+            importantFeatures.append(str(x))
+    print 'Most important features:', ', '.join(importantFeatures)
+    print rf.oob_score_
 
-    stf = cross_validation.StratifiedKFold(Y, folds)
-    logging.info("CV Folds: " + str(folds))
-    loss = []
-    print "Testing..."
-    for i, (train, test) in enumerate(stf):
-        X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
-        rf.fit(X_train, y_train)
-        predicted = rf.predict(X_test)
-        probs = rf.predict_proba(X_test)
-        probs = [[min(max(x, 0.001), 0.999) for x in y]
-                       for y in probs]
-        loss.append(utils.logloss(probs, y_test, classMap))
-        accs.append(utils.accuracy(predicted, y_test))
-        logging.info("Accuracy(Fold {0}): ".format(i) + str(accs[len(accs) - 1]))
-        logging.info("Loss(Fold {0}): ".format(i) + str(loss[len(loss) - 1]))
-    logging.info("Mean Accuracy: " + str(np.mean(accs)))
-    logging.info("Mean Loss: " + str(np.mean(loss)))
 
 if __name__ == "__main__":
     main()
-
-        for x,i in enumerate(rf.feature_importances_):
-        if i>np.average(rf.feature_importances_):
-            important_features.append(str(x))
-        print 'Most important features:',', '.join(important_features)
