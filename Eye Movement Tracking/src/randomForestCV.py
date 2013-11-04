@@ -11,13 +11,24 @@ import logging
 import datetime
 
 def preprocess(data):
-    focusXPts = [(1, 0), (398, 2048), (536, 2048), (673, 0), (810, 0), (947, -2048), (1085, 0),
-                 (1222, 2048), (1364, 0), (1496, 2048), (1634, -2048), (1771, 0)]
-    focusYPts = [(1, 0), (398, -2048), (536, 0), (673, 2048), (810, 0), (947, 0), (1085, -2048),
-                 (1222, 2048), (1364, 0), (1496, 0), (1634, -2048), (1771, 0)]
-
-    print sorted(focusXPts.iteritems())
-    print sorted(focusYPts.iteritems())
+    # taken from http://www.kasprowski.pl/emvic/stimFile.txt
+    # format (from, to, Xfocus, Yfocus)
+    focusPts = [(1, 398, 0, 0), (398, 536, 2048, -2048), (536, 673, 2048, 0), (673, 810, 0, 2048),
+                 (810, 947, 0, 0), (947, 1085, -2048, 0), (1085, 1222, 0, -2048),  (1222, 1364, 2048, 2048),
+                 (1364, 1496, 0, 0), (1496, 1634, 2048, 0), (1634, 1771, -2048, -2048), (1771, 2048, 0, 0)]
+    for sample in data:
+        lx, rx, ly, ry = splitSampleIntoParts(sample)
+        for focus in focusPts:
+            # change mean to focus point and
+            # corner normalization to (-1, 1)
+            lxmean = np.mean(lx[focus[0]:focus[1]])
+            lx[focus[0]:focus[1]] = [(point - lxmean + focus[2])/2048 for point in lx[focus[0]:focus[1]]]
+            rxmean = np.mean(rx[focus[0]:focus[1]])
+            rx[focus[0]:focus[1]] = [(point - rxmean + focus[2])/2048 for point in rx[focus[0]:focus[1]]]
+            lymean = np.mean(ly[focus[0]:focus[1]])
+            ly[focus[0]:focus[1]] = [(point - lymean + focus[3])/2048 for point in ly[focus[0]:focus[1]]]
+            rymean = np.mean(ry[focus[0]:focus[1]])
+            ry[focus[0]:focus[1]] = [(point - rymean + focus[3])/2048 for point in ry[focus[0]:focus[1]]]
 
 
 def addFeatures(part, width):
@@ -35,24 +46,27 @@ def addFeatures(part, width):
         u = v
     return features
 
-def extractFeatures(data):
+def splitSampleIntoParts(sample):
     splitPt = 2048
+    lx = sample[:splitPt]
+    rx = sample[splitPt:splitPt*2]
+    ly = sample[splitPt*2:splitPt*3]
+    ry = sample[splitPt*3:]
+    return [lx, rx, ly, ry]
+
+def extractFeatures(data):
     width = 32
     Pdata = [[] for _ in xrange(len(data))]
     for i, sample in enumerate(data):
-        lx = sample[:splitPt]
-        rx = sample[splitPt:splitPt*2]
-        ly = sample[splitPt*2:splitPt*3]
-        ry = sample[splitPt*3:]
-        parts = [rx, ry]
+        parts = splitSampleIntoParts(sample)
         for part in parts:
             Pdata[i].extend(addFeatures(part, width))
     return Pdata
 
 def main():
-    logging.info("Features: Mean, Std, Velocity")
+    logging.info("[FIXED]Features: Std, Velocity, Acceleration")
     X, Y = utils.read_data("../files/train.csv")
-    X = preprocess(X)
+    preprocess(X)
     X = extractFeatures(X)
     #X = [x[400:405] for x in X]
     Y = [int(x) for x in Y]
@@ -89,7 +103,7 @@ def setupLogging():
     logging.getLogger('').addHandler(console)
 
 if __name__ == "__main__":
-    #setupLogging()
+    setupLogging()
     logging.info("Start at: " + str(datetime.datetime.now()))
     main()
     logging.info("End at: " + str(datetime.datetime.now()))
