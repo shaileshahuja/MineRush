@@ -31,6 +31,10 @@ def preprocess(data):
             rymean = np.mean(ry[focus[0]:focus[1]])
             ry[focus[0]:focus[1]] = [(point - rymean + focus[3])/2048 for point in ry[focus[0]:focus[1]]]
         processedData[i] = lx + rx + ly + ry
+        print lx
+        print ly
+        print rx
+        print ry
     return processedData
 
 
@@ -110,7 +114,7 @@ def setupLogging():
     logging.getLogger('').addHandler(console)
 
 if __name__ == "__main__":
-    setupLogging()
+    #setupLogging()
     logging.info("Start at: " + str(datetime.datetime.now()))
     main()
     logging.info("End at: " + str(datetime.datetime.now()))
