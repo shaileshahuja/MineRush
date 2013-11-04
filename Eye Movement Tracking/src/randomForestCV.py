@@ -10,17 +10,32 @@ import math
 import logging
 import datetime
 
+def preprocess(data):
+    focusXPts = [(1, 0), (398, 2048), (536, 2048), (673, 0), (810, 0), (947, -2048), (1085, 0),
+                 (1222, 2048), (1364, 0), (1496, 2048), (1634, -2048), (1771, 0)]
+    focusYPts = [(1, 0), (398, -2048), (536, 0), (673, 2048), (810, 0), (947, 0), (1085, -2048),
+                 (1222, 2048), (1364, 0), (1496, 0), (1634, -2048), (1771, 0)]
+
+    print sorted(focusXPts.iteritems())
+    print sorted(focusYPts.iteritems())
+
+
 def addFeatures(part, width):
     features = []
+    u = 0
     for multiple in xrange(1, len(part) / width):
         prevPt = (multiple - 1) * width
         currPt = multiple * width
         features.append(np.mean(part[prevPt: currPt]))
         features.append(np.std(part[prevPt: currPt]))
-        features.append((part[currPt - 1] - part[prevPt]) / width)
+        v = (part[currPt - 1] - part[prevPt]) / width
+        features.append(v)
+        a = (v - u) / width
+        #features.append(a)
+        u = v
     return features
 
-def preprocess(data):
+def extractFeatures(data):
     splitPt = 2048
     width = 32
     Pdata = [[] for _ in xrange(len(data))]
@@ -29,16 +44,17 @@ def preprocess(data):
         rx = sample[splitPt:splitPt*2]
         ly = sample[splitPt*2:splitPt*3]
         ry = sample[splitPt*3:]
-        parts = [lx, rx, ly, ry]
+        parts = [rx, ry]
         for part in parts:
             Pdata[i].extend(addFeatures(part, width))
     return Pdata
 
 def main():
-    logging.info("Features: Raw data")
+    logging.info("Features: Mean, Std, Velocity")
     X, Y = utils.read_data("../files/train.csv")
-    #X = preprocess(X)
-    X = [x[1:] for x in X]
+    X = preprocess(X)
+    X = extractFeatures(X)
+    #X = [x[400:405] for x in X]
     Y = [int(x) for x in Y]
     X, Y = np.array(X), np.array(Y)
     classMap = sorted(list(set(Y)))
@@ -52,6 +68,7 @@ def main():
     for i, (train, test) in enumerate(stf):
         X_train, X_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
         rf.fit(X_train, y_train)
+
         predicted = rf.predict(X_test)
         probs = rf.predict_proba(X_test)
         probs = [[min(max(x, 0.001), 0.999) for x in y]
@@ -72,7 +89,7 @@ def setupLogging():
     logging.getLogger('').addHandler(console)
 
 if __name__ == "__main__":
-    setupLogging()
+    #setupLogging()
     logging.info("Start at: " + str(datetime.datetime.now()))
     main()
     logging.info("End at: " + str(datetime.datetime.now()))

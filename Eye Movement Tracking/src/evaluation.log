@@ -44,3 +44,118 @@ Mean Loss: 1.65845590728
 End at: 2013-11-04 14:54:35.148000
 
 
+Start at: 2013-11-04 15:03:19.290000
+Features: Right Eye Only (Raw)
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.618320610687
+Loss(Fold 0): 1.73435916033
+Accuracy(Fold 1): 0.625954198473
+Loss(Fold 1): 1.69689088307
+Accuracy(Fold 2): 0.607692307692
+Loss(Fold 2): 1.66481713799
+Accuracy(Fold 3): 0.623076923077
+Loss(Fold 3): 1.65746867816
+Accuracy(Fold 4): 0.669230769231
+Loss(Fold 4): 1.60088133856
+Mean Accuracy: 0.628854961832
+Mean Loss: 1.67088343962
+End at: 2013-11-04 15:07:07.967000
+
+
+Start at: 2013-11-04 15:09:47.299000
+Features: Left Eye Only (Raw)
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.549618320611
+Loss(Fold 0): 1.87322543926
+Accuracy(Fold 1): 0.549618320611
+Loss(Fold 1): 1.9051831693
+Accuracy(Fold 2): 0.576923076923
+Loss(Fold 2): 1.70162399939
+Accuracy(Fold 3): 0.615384615385
+Loss(Fold 3): 1.68406432399
+Accuracy(Fold 4): 0.553846153846
+Loss(Fold 4): 1.82114000812
+Mean Accuracy: 0.569078097475
+Mean Loss: 1.79704738801
+End at: 2013-11-04 15:13:33.630000
+
+
+Start at: 2013-11-04 15:58:26.324000
+Features: Mean, Std, Velocity, Accelaration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.732824427481
+Loss(Fold 0): 1.5409419654
+Accuracy(Fold 1): 0.717557251908
+Loss(Fold 1): 1.47859377182
+Accuracy(Fold 2): 0.738461538462
+Loss(Fold 2): 1.51818170341
+Accuracy(Fold 3): 0.676923076923
+Loss(Fold 3): 1.5546435451
+Accuracy(Fold 4): 0.753846153846
+Loss(Fold 4): 1.54049014934
+Mean Accuracy: 0.723922489724
+Mean Loss: 1.52657022701
+End at: 2013-11-04 15:59:55.646000
+
+
+Start at: 2013-11-04 16:25:26.219000
+Features: Std, Velocity, Accelaration
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.709923664122
+Loss(Fold 0): 1.52855707283
+Accuracy(Fold 1): 0.740458015267
+Loss(Fold 1): 1.45843354632
+Accuracy(Fold 2): 0.723076923077
+Loss(Fold 2): 1.51316804649
+Accuracy(Fold 3): 0.692307692308
+Loss(Fold 3): 1.5508742674
+Accuracy(Fold 4): 0.730769230769
+Loss(Fold 4): 1.54488060626
+Mean Accuracy: 0.719307105109
+Mean Loss: 1.51918270786
+End at: 2013-11-04 16:26:44.913000
+
+
+Start at: 2013-11-04 16:27:39.373000
+Features: Mean, Std, Velocity
+RandomForestClassifier(bootstrap=True, compute_importances=None,
+            criterion=gini, max_depth=None, max_features=auto,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            n_estimators=1000, n_jobs=-1, oob_score=True,
+            random_state=None, verbose=0)
+CV Folds: 5
+Accuracy(Fold 0): 0.709923664122
+Loss(Fold 0): 1.58527601859
+Accuracy(Fold 1): 0.732824427481
+Loss(Fold 1): 1.48188488501
+Accuracy(Fold 2): 0.715384615385
+Loss(Fold 2): 1.53477604915
+Accuracy(Fold 3): 0.692307692308
+Loss(Fold 3): 1.54937245439
+Accuracy(Fold 4): 0.738461538462
+Loss(Fold 4): 1.53038608537
+Mean Accuracy: 0.717780387551
+Mean Loss: 1.5363390985
+End at: 2013-11-04 16:29:01.052000
+
+
